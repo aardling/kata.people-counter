@@ -1,0 +1,10 @@
+{
+    "name": "mathias/people-counter-php",
+    "authors": [
+        {
+            "name": "Mathias Verraes",
+            "email": "mathias@verraes.net"
+        }
+    ],
+    "require": {}
+}
