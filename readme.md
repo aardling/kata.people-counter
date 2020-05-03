@@ -41,8 +41,9 @@ Advanced:
         print "Lobby: {lobby.occupancy()}"
         sleep(1)
     endrepeat
+```
 
-
+```
 class Counter
     - ip
     - name
@@ -79,8 +80,9 @@ class Counter
 
     + friendlyName()
         return friendly_name
+```
 
-
+```
 class Zone
     name
     counters = []
