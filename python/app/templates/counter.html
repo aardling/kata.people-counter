@@ -1,0 +1,39 @@
+<!doctype html>
+
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="static/counter.css">
+    <meta http-equiv="refresh" content="300">
+    <title>Abattoir counter</title>
+  </head>
+
+  <body>
+    <div id="page">
+      <div id="zone-name">{{ zone.name }}</div>
+      <div id="zone-occupancy">{{ zone.occupancy }}</div>
+      <div id="counters">
+        <table>
+          <tr>
+            <th></th>
+            <th>in</th>
+            <th>uit</th>
+          </tr>
+          {% for counter in zone.counters %}
+          <tr>
+            <td>{{ counter.name }}</td>
+            <td class="table-number">{{ counter.in }}</td>
+            <td class="table-number">{{ counter.out }}</td>
+          </tr>
+          {% endfor %}
+          <tr class="totals">
+            <td>totaal</td>
+            <td class="table-number">{{ zone.in }}</td>
+            <td class="table-number">{{ zone.out }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

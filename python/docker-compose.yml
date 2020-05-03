@@ -1,0 +1,8 @@
+version: '3.7'
+services:
+  app:
+    image: people-counter:0.1.1
+    build:
+      context: .
+    ports:
+      - 80:80
