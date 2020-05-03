@@ -10,7 +10,7 @@ For safety, we need to make sure we don't exceed the maximum occupancy in any zo
 
 We've installed cameras pointed at all the entrances of each zone of the building. The cameras can count people coming in and going out. We can query this data using the cameras' API. We calculate the occupancy of each zone and show it on a monitor in the security's control room.
 
-![](peoplecounter.png)
+![](peoplecounter.jpg)
 
 ## Tips
 
@@ -132,3 +132,8 @@ class Zone
         return occupancy
 
 ```
+
+  
+---
+
+<sub>(c) Mathias Verraes [verraes.net](https://verraes.net)</sub>
