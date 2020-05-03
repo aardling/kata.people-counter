@@ -1,5 +1,6 @@
 <?php declare(strict_types=1);
 Main::main1();
+
 class Main
 {
     public static function main1()
@@ -14,7 +15,7 @@ class Main
                 new Counter($httpClient, 'Camera5', '192.168.55.134'),
             ]);
 
-        while(true) {
+        while (true) {
             $lobby->update();
             print "Lobby {$lobby->occupancy()}\n";
             sleep(1);
@@ -125,17 +126,17 @@ class Zone
 }
 
 
-
 class HttpClient
 {
-    function get() {
+    function get()
+    {
         return
             [
                 'in' => random_int(0, 10),
                 'out' => random_int(0, 10),
-                'name' => "name".random_int(0, 10),
-                'timestamp' => "ts".random_int(0, 10),
-                'serial' => "serial".random_int(0, 10),
-                ];
+                'name' => "name" . random_int(0, 10),
+                'timestamp' => "ts" . random_int(0, 10),
+                'serial' => "serial" . random_int(0, 10),
+            ];
     }
 }
