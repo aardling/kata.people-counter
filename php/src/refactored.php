@@ -1,6 +1,9 @@
 <?php declare(strict_types=1);
 Main::main1();
 
+/**
+ * @TODO move http further out, add a factory or repo of sorts, turn Zone.update into a map/fold
+ */
 class Main
 {
     public static function main1()
