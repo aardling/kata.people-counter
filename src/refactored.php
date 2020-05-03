@@ -1,19 +1,20 @@
 <?php declare(strict_types=1);
 Main::main1();
+
 class Main
 {
     public static function main1()
     {
         $httpClient = new HttpClient();
         $lobby = new Zone($httpClient, 'South Lobby', [
-            new Counter('Camera1', '192.168.55.130'),
-            new Counter('Camera2', '192.168.55.131'),
-            new Counter('Camera3', '192.168.55.132'),
-            new Counter('Camera4', '192.168.55.133'),
-            new Counter('Camera5', '192.168.55.134'),
+            new Camera('Camera1', '192.168.55.130'),
+            new Camera('Camera2', '192.168.55.131'),
+            new Camera('Camera3', '192.168.55.132'),
+            new Camera('Camera4', '192.168.55.133'),
+            new Camera('Camera5', '192.168.55.134'),
         ]);
 
-        while(true) {
+        while (true) {
             $lobby->update();
             print "Lobby {$lobby->occupancy()}\n";
             sleep(1);
@@ -21,7 +22,8 @@ class Main
     }
 }
 
-class Count {
+class Count
+{
     private $in;
     private $out;
 
@@ -31,13 +33,19 @@ class Count {
         $this->out = $out;
     }
 
+    public static function empty(): Count
+    {
+        return new Count(0, 0);
+    }
+
     public function occupancy()
     {
         return $this->in - $this->out;
     }
 
-    public function add(Count $c):Count {
-     return new Count($this->in + $c->in, $this->out + $c->out);
+    public function add(Count $c): Count
+    {
+        return new Count($this->in + $c->in, $this->out + $c->out);
     }
 
     function in()
@@ -52,7 +60,8 @@ class Count {
 
 
 }
-class Counter
+
+class Camera
 {
     private $ip;
     private $name;
@@ -80,17 +89,13 @@ class Counter
         }
     }
 
-    function totalIn(): int
+    function count() : Count
     {
-        return $this->total_in;
+        return $this->count;
     }
 
-    function totalOut(): int
-    {
-        return $this->total_out;
-    }
 
-    function triendlyName(): string
+    function friendlyName(): string
     {
         return $this->friendly_name;
     }
@@ -101,67 +106,48 @@ class Counter
 class Zone
 {
     private $name;
-    private $counters = [];
-    private $totalIn = 0;
-    private $totalOut = 0;
-    private $occupancy = 0;
+    private $cameras = [];
     private $httpClient;
+    private Count $count;
 
-    function __construct(HttpClient $httpClient, $name, $counters)
+    function __construct(HttpClient $httpClient, $name, $cameras)
     {
         $this->name = $name;
-        $this->counters = $counters;
+        $this->cameras = $cameras;
+        $this->count = Count::empty();
         $this->httpClient = $httpClient;
     }
 
     public function update()
     {
-        $this->totalIn = 0;
-        $this->totalOut = 0;
-        /** @var Counter $counter */
-        foreach ($this->counters as $counter) {
-            $counter->update($this->httpClient);
-            $this->totalIn += $counter->totalIn();
-            $this->totalOut += $counter->totalOut();
+        $this->count = Count::empty();
+        foreach ($this->cameras as $camera) {
+            $camera->update($this->httpClient);
+            $this->count = $this->count->add($camera->count());
         }
-        $this->occupancy = $this->totalIn - $this->totalOut;
     }
 
-    function counters(): array
-    {
-        return $this->counters;
-    }
-
-    function totalIn(): int
-    {
-        return $this->totalIn;
-    }
-
-    function totalOut(): int
-    {
-        return $this->totalOut;
-    }
 
     function occupancy(): int
     {
-        return $this->occupancy;
+        return $this->count->occupancy();
     }
 
 
 }
 
 
-
 class HttpClient
 {
-    function get() {
+    function get()
+    {
         return
             [
                 'in' => random_int(0, 10),
                 'out' => random_int(0, 10),
-                'name' => "name".random_int(0, 10),
-                'timestamp' => "ts".random_int(0, 10),
-                'serial' => "serial".random_int(0, 10),
-                ];
+                'name' => "name" . random_int(0, 10),
+                'timestamp' => "ts" . random_int(0, 10),
+                'serial' => "serial" . random_int(0, 10),
+            ];
     }
 }

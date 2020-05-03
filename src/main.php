@@ -7,11 +7,11 @@ class Main
         $httpClient = new HttpClient();
         $lobby = new Zone('South Auditorium',
             [
-                new Counter($httpClient, 'Camera1', '192.168.55.130'),
-                new Counter($httpClient, 'Camera2', '192.168.55.131'),
-                new Counter($httpClient, 'Camera3', '192.168.55.132'),
-                new Counter($httpClient, 'Camera4', '192.168.55.133'),
-                new Counter($httpClient, 'Camera5', '192.168.55.134'),
+                new Camera($httpClient, 'Camera1', '192.168.55.130'),
+                new Camera($httpClient, 'Camera2', '192.168.55.131'),
+                new Camera($httpClient, 'Camera3', '192.168.55.132'),
+                new Camera($httpClient, 'Camera4', '192.168.55.133'),
+                new Camera($httpClient, 'Camera5', '192.168.55.134'),
             ]);
 
         while(true) {
@@ -66,7 +66,7 @@ class Counter
         return $this->total_out;
     }
 
-    function triendlyName(): string
+    function friendlyName(): string
     {
         return $this->friendly_name;
     }
@@ -77,15 +77,15 @@ class Counter
 class Zone
 {
     private $name;
-    private $counters = [];
-    private $totalIn = 0;
-    private $totalOut = 0;
+    private $cameras = [];
+    private $count;
     private $occupancy = 0;
 
-    function __construct($name, $counters)
+    function __construct($name, $cameras)
     {
         $this->name = $name;
-        $this->counters = $counters;
+        $this->cameras = $cameras;
+        $this->count = Count::empty();
         $this->update();
     }
 
@@ -93,7 +93,7 @@ class Zone
     {
         $this->totalIn = 0;
         $this->totalOut = 0;
-        foreach ($this->counters as $counter) {
+        foreach ($this->cameras as $counter) {
             $counter->update();
             $this->totalIn += $counter->totalIn();
             $this->totalOut += $counter->totalOut();
@@ -101,9 +101,9 @@ class Zone
         $this->occupancy = $this->totalIn - $this->totalOut;
     }
 
-    function counters(): array
+    function cameras(): array
     {
-        return $this->counters;
+        return $this->cameras;
     }
 
     function totalIn(): int
