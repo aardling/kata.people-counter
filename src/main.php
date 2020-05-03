@@ -5,7 +5,7 @@ class Main
     public static function main1()
     {
         $httpClient = new HttpClient();
-        $lobby = new Zone('South Lobby',
+        $lobby = new Zone('South Auditorium',
             [
                 new Counter($httpClient, 'Camera1', '192.168.55.130'),
                 new Counter($httpClient, 'Camera2', '192.168.55.131'),
