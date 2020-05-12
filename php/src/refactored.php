@@ -70,7 +70,7 @@ class Camera
     private $name;
     private $count;
     private $friendly_name = "";
-    private $last_udpate;
+    private $last_update;
     private $serial;
 
     function __construct($ip, $name)
@@ -85,7 +85,7 @@ class Camera
             $data = $httpClient->get("http://{$this->ip}/people-counter/api/live.json");
             $this->count = new Count($data['in'], $data['out']);
             $this->friendly_name = $data['name'];
-            $this->last_udpate = $data['timestamp'];
+            $this->last_update = $data['timestamp'];
             $this->serial = $data['serial'];
         } catch (Exception $e) {
             $this->$this->friendly_name = "error connecting to {$this->name}";

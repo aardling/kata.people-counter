@@ -31,7 +31,7 @@ class Counter
     private $total_in = 0;
     private $total_out = 0;
     private $friendly_name = "";
-    private $last_udpate;
+    private $last_update;
     private $serial;
     private $httpClient;
 
@@ -50,7 +50,7 @@ class Counter
             $this->total_in = $data['in'];
             $this->total_out = $data['out'];
             $this->friendly_name = $data['name'];
-            $this->last_udpate = $data['timestamp'];
+            $this->last_update = $data['timestamp'];
             $this->serial = $data['serial'];
         } catch (Exception $e) {
             $this->$this->friendly_name = "error connecting to {$this->name}";

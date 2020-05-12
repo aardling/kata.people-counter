@@ -59,7 +59,7 @@ class Counter
     - total_in = 0
     - total_out = 0
     - friendly_name = ""
-    - last_udpate
+    - last_update
     - serial
     - httpClient
 
@@ -75,7 +75,7 @@ class Counter
             total_in = data['in']
             total_out = data['out']
             friendly_name = data['name']
-            last_udpate = data['timestamp']
+            last_update = data['timestamp']
             serial = data['serial']
         catch (Exception e)
             friendly_name = "error connecting to {name}"
