@@ -8,7 +8,7 @@ class Main
 {
     public static function main1()
     {
-        $httpClient = new HttpClient();
+        $httpClient = new MockHttpClient();
         $lobby = new Zone($httpClient, 'South Lobby', [
             new Camera('Camera1', '192.168.55.130'),
             new Camera('Camera2', '192.168.55.131'),
@@ -25,7 +25,7 @@ class Main
     }
 }
 
-class Count
+class Occupancy
 {
     private $in;
     private $out;
@@ -36,19 +36,19 @@ class Count
         $this->out = $out;
     }
 
-    public static function empty(): Count
+    public static function empty(): Occupancy
     {
-        return new Count(0, 0);
+        return new Occupancy(0, 0);
     }
 
-    public function occupancy()
+    public function total()
     {
         return $this->in - $this->out;
     }
 
-    public function add(Count $c): Count
+    public function add(Occupancy $c): Occupancy
     {
-        return new Count($this->in + $c->in, $this->out + $c->out);
+        return new Occupancy($this->in + $c->in, $this->out + $c->out);
     }
 
     function in()
@@ -83,7 +83,7 @@ class Camera
     {
         try {
             $data = $httpClient->get("http://{$this->ip}/people-counter/api/live.json");
-            $this->count = new Count($data['in'], $data['out']);
+            $this->count = new Occupancy($data['in'], $data['out']);
             $this->friendly_name = $data['name'];
             $this->last_update = $data['timestamp'];
             $this->serial = $data['serial'];
@@ -92,7 +92,7 @@ class Camera
         }
     }
 
-    function count() : Count
+    function count() : Occupancy
     {
         return $this->count;
     }
@@ -111,19 +111,19 @@ class Zone
     private $name;
     private $cameras = [];
     private $httpClient;
-    private Count $count;
+    private Occupancy $count;
 
     function __construct(HttpClient $httpClient, $name, $cameras)
     {
         $this->name = $name;
         $this->cameras = $cameras;
-        $this->count = Count::empty();
+        $this->count = Occupancy::empty();
         $this->httpClient = $httpClient;
     }
 
     public function update()
     {
-        $this->count = Count::empty();
+        $this->count = Occupancy::empty();
         foreach ($this->cameras as $camera) {
             $camera->update($this->httpClient);
             $this->count = $this->count->add($camera->count());
@@ -133,14 +133,18 @@ class Zone
 
     function occupancy(): int
     {
-        return $this->count->occupancy();
+        return $this->count->total();
     }
 
 
 }
 
+interface HttpClient
+{
+    function get();
+}
 
-class HttpClient
+class MockHttpClient implements HttpClient
 {
     function get()
     {
