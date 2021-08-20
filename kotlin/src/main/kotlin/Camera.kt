@@ -2,6 +2,8 @@ package com.vo
 
 import java.time.ZonedDateTime
 
+data class CameraState(val currentCount: CurrentCount, val friendlyName : String, val lastUpdate : ZonedDateTime, val serial: String)
+
 class Camera(private val httpClient: HttpClient, private val name: String, private val ip: String) {
     private var friendlyName = ""
     private var lastUpdate = ZonedDateTime.now()
@@ -22,6 +24,12 @@ class Camera(private val httpClient: HttpClient, private val name: String, priva
         } catch (e: Exception) {
             friendlyName = "error connectiong to ${name}"
         }
+    }
+
+    fun update2() : CameraState {
+        val data = httpClient.fetch("http://${ip}/people-counter/api/live.json")
+        currentCount = CurrentCount(data.inAmount, data.outAmount)
+        return CameraState(currentCount, data.name, data.timestamp, data.serial)
     }
 
 
