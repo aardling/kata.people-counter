@@ -1,18 +1,12 @@
 package com.vo
 
 class Zone(private val name: String, private val cameras: List<Camera>) {
-    private var totalIn = 0
-    private var totalOut = 0
-    var occupancy = 0
+    private var currentCount = CurrentCount(0, 0)
+    val occupancy get() = currentCount.total
 
     fun update() {
-        totalIn = 0;
-        totalOut = 0;
-        for (counter in cameras) {
-            counter.update()
-            totalIn += counter.totalIn
-            totalOut += counter.totalOut
+        currentCount = cameras.fold(CurrentCount(0, 0)) {currentCount, camera ->
+            currentCount.add(camera.currentCount)
         }
-        occupancy = totalIn - totalOut
     }
 }

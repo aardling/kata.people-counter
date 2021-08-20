@@ -3,12 +3,10 @@ package com.vo
 import java.time.ZonedDateTime
 
 class Camera(private val httpClient: HttpClient, private val name: String, private val ip: String) {
-    val totalIn get() = currentCount.inAmount
-    val totalOut get() = currentCount.outAmount
     private var friendlyName = ""
     private var lastUpdate = ZonedDateTime.now()
     private var serial = ""
-    private var currentCount = CurrentCount(0, 0)
+    var currentCount = CurrentCount(0, 0)
 
     init {
         update()
