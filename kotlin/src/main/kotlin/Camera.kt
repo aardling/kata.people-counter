@@ -2,7 +2,7 @@ package com.vo
 
 import java.time.ZonedDateTime
 
-class Counter(private val httpClient: HttpClient, private val name: String, private val ip: String) {
+class Camera(private val httpClient: HttpClient, private val name: String, private val ip: String) {
     var totalIn = 0
     var totalOut = 0
     private var friendlyName = ""
