@@ -1,6 +1,7 @@
 package com.vo
 
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class PeopleCounterTest {
@@ -22,4 +23,8 @@ class PeopleCounterTest {
         lobby.update()
         assertEquals(lobby.occupancy, 25)
     }
+
+    @Disabled
+    @Test
+    fun `should handle errors`() {}
 }
