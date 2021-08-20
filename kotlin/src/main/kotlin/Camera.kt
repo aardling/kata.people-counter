@@ -3,11 +3,12 @@ package com.vo
 import java.time.ZonedDateTime
 
 class Camera(private val httpClient: HttpClient, private val name: String, private val ip: String) {
-    var totalIn = 0
-    var totalOut = 0
+    val totalIn get() = currentCount.inAmount
+    val totalOut get() = currentCount.outAmount
     private var friendlyName = ""
     private var lastUpdate = ZonedDateTime.now()
     private var serial = ""
+    private var currentCount = CurrentCount(0, 0)
 
     init {
         update()
@@ -16,8 +17,7 @@ class Camera(private val httpClient: HttpClient, private val name: String, priva
     fun update() {
         try {
             val data = httpClient.fetch("http://${ip}/people-counter/api/live.json")
-            totalIn = data.inAmount
-            totalOut = data.outAmount
+            currentCount = CurrentCount(data.inAmount, data.outAmount)
             friendlyName = data.name
             lastUpdate = data.timestamp
             serial = data.serial
