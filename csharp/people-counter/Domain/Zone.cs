@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace Domain
 {
@@ -6,9 +7,9 @@ namespace Domain
     {
         private readonly string _name;
         private readonly List<Camera> _counters;
-        public int occupancy;
         private int _totalIn;
         private int _totalOut;
+        public int Occupancy  => _totalIn - _totalOut;
 
         public Zone(string name, List<Camera> counters)
         {
@@ -27,8 +28,6 @@ namespace Domain
                 this._totalOut += camera.TotalOut;
                 
             }
-
-            this.occupancy = this._totalIn - this._totalOut;
         }
     }
 }
