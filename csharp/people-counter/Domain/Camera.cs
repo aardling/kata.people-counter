@@ -15,10 +15,10 @@ namespace Domain
             _ip = ip;
         }
 
-        public CurrentCount CurrentCount()
+        public PeopleFlow PeopleFlow()
         {
             var data = this._httpClient.fetch("http://${ip}/people-counter/api/live.json");
-            return new CurrentCount(data.InAmount, data.OutAmount);
+            return new PeopleFlow(data.InAmount, data.OutAmount);
         }
     }
 }
