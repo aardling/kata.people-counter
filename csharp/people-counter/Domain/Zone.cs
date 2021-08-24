@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace Domain
 {
@@ -20,11 +19,8 @@ namespace Domain
 
         public void Update()
         {
-            this._currentCount = this._counters.Aggregate(new CurrentCount(0, 0), ((count, camera) =>
-            {
-                camera.Update();
-                return count.Add(camera.CurrentCount);
-            }));
+            this._currentCount = this._counters.Aggregate(new CurrentCount(0, 0),
+                ((count, camera) => count.Add(camera.CurrentCount())));
         }
     }
 }
