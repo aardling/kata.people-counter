@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Domain.Tests
+namespace Domain
 {
     public class Zone
     {
