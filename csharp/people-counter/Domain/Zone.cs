@@ -20,11 +20,11 @@ namespace Domain
         {
             this._totalIn = 0;
             this._totalOut = 0;
-            foreach (var counter in this._counters)
+            foreach (var camera in this._counters)
             {
-                counter.Update();
-                this._totalIn += counter.TotalIn;
-                this._totalOut += counter.TotalOut;
+                camera.Update();
+                this._totalIn += camera.TotalIn;
+                this._totalOut += camera.TotalOut;
                 
             }
 
