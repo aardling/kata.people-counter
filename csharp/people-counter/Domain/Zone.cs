@@ -17,7 +17,7 @@ namespace Domain
             _currentCount = new CurrentCount(0, 0);
         }
 
-        public void update()
+        public void Update()
         {
             foreach (var camera in this._counters)
             {

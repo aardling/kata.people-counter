@@ -20,7 +20,7 @@ namespace Domain.Tests
                 }
             );
 
-            lobby.update();
+            lobby.Update();
             Assert.Equal(lobby.Occupancy, 25);
         }
     }
