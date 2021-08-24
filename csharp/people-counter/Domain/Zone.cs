@@ -5,12 +5,12 @@ namespace Domain.Tests
     public class Zone
     {
         private readonly string _name;
-        private readonly List<Counter> _counters;
+        private readonly List<Camera> _counters;
         public int occupancy;
         private int _totalIn;
         private int _totalOut;
 
-        public Zone(string name, List<Counter> counters)
+        public Zone(string name, List<Camera> counters)
         {
             _name = name;
             _counters = counters;

@@ -3,7 +3,7 @@ using System.Data;
 
 namespace Domain.Tests
 {
-    public class Counter
+    public class Camera
     {
         private readonly HttpClient _httpClient;
         private readonly string _name;
@@ -14,7 +14,7 @@ namespace Domain.Tests
         private DateTime _lastUpdate;
         private string _serial;
 
-        public Counter(HttpClient httpClient, string name, string ip)
+        public Camera(HttpClient httpClient, string name, string ip)
         {
             _httpClient = httpClient;
             _name = name;
