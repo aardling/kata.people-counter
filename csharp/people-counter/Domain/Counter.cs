@@ -1,7 +1,6 @@
 using System;
-using System.Data;
 
-namespace Domain.Tests
+namespace Domain
 {
     public class Counter
     {
