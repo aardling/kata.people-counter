@@ -40,8 +40,4 @@ namespace Domain
         }
 
     }
-
-    public record CurrentCount(int InAmount, int OutAmount)
-    {
-    }
 }
