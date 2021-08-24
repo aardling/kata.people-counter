@@ -7,26 +7,22 @@ namespace Domain
     {
         private readonly string _name;
         private readonly List<Camera> _counters;
-        private int _totalIn;
-        private int _totalOut;
-        public int Occupancy  => _totalIn - _totalOut;
+        private CurrentCount _currentCount;
+        public int Occupancy => _currentCount.Total;
 
         public Zone(string name, List<Camera> counters)
         {
             _name = name;
             _counters = counters;
+            _currentCount = new CurrentCount(0, 0);
         }
 
         public void update()
         {
-            this._totalIn = 0;
-            this._totalOut = 0;
             foreach (var camera in this._counters)
             {
                 camera.Update();
-                this._totalIn += camera.TotalIn;
-                this._totalOut += camera.TotalOut;
-                
+                _currentCount = _currentCount.Add(camera.CurrentCount);
             }
         }
     }

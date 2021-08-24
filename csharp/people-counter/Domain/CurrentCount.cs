@@ -6,5 +6,7 @@ namespace Domain
         {
             return new CurrentCount(this.InAmount + other.InAmount, this.OutAmount + other.OutAmount);
         }
+
+        public int Total => InAmount - OutAmount;
     }
 }

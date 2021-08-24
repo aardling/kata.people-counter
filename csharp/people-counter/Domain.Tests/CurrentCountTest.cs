@@ -8,7 +8,7 @@ namespace Domain.Tests
         public void ShouldAddTwoCurrentCounts()
         {
             var actual = new CurrentCount(1, 1).Add(new CurrentCount(4, 1));
-            Assert.Equal(new CurrentCount(5, 2), actual);
+            Assert.Equal(new CurrentCount(5, 2).Total, actual.Total);
         }
     }
 }
