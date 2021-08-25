@@ -20,8 +20,8 @@ namespace Domain.Tests
                 }
             );
 
-            var cameras = new CameraMeasurements(httpClient);
-            var occupancy = cameras.GetFor(lobby);
+            var measurements = new CameraMeasurements(httpClient).ForZone(lobby);
+            var occupancy = Occupancy.From(measurements);
 
             Assert.Equal(25, occupancy.Total);
         }
