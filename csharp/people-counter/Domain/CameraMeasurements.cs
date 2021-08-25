@@ -2,11 +2,11 @@ using System.Linq;
 
 namespace Domain
 {
-    public class Cameras
+    public class CameraMeasurements
     {
         private readonly HttpClient _httpClient;
 
-        public Cameras(HttpClient httpClient)
+        public CameraMeasurements(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }

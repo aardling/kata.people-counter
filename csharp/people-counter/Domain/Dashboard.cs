@@ -4,16 +4,16 @@ namespace Domain
 {
     public class Dashboard
     {
-        private readonly Cameras _cameras;
+        private readonly CameraMeasurements _cameraMeasurements;
 
-        public Dashboard(Cameras cameras)
+        public Dashboard(CameraMeasurements cameraMeasurements)
         {
-            _cameras = cameras;
+            _cameraMeasurements = cameraMeasurements;
         }
 
         public void Show(Zone zone)
         {
-            var occupancy = this._cameras.GetFor(zone);
+            var occupancy = this._cameraMeasurements.GetFor(zone);
             Console.WriteLine($"Total is: {occupancy.Total}");
         }
     }
