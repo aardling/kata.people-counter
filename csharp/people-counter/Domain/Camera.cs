@@ -7,7 +7,7 @@ namespace Domain
         private readonly string _name;
         public readonly string Ip;
 
-        public Camera(HttpClient httpClient, string name, string ip)
+        public Camera(string name, string ip)
         {
             _name = name;
             Ip = ip;
