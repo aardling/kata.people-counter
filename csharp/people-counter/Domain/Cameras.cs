@@ -11,10 +11,10 @@ namespace Domain
             _httpClient = httpClient;
         }
 
-        public PeopleFlow Get(Zone zone)
+        public Occupancy GetFor(Zone zone)
         {
-            var forCameras = zone.Cameras.Select(ForCamera);
-            return PeopleFlow.Sum(forCameras);
+            var peopleFlows = zone.Cameras.Select(ForCamera);
+            return Occupancy.CalculateBasedOne(peopleFlows);
         }
 
         private PeopleFlow ForCamera(Camera camera)

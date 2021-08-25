@@ -13,8 +13,8 @@ namespace Domain
 
         public void Show(Zone zone)
         {
-            var peopleFlow = this._cameras.Get(zone);
-            Console.WriteLine("Total is: {peopleFlow.Total}");
+            var occupancy = this._cameras.GetFor(zone);
+            Console.WriteLine($"Total is: {occupancy.Total}");
         }
     }
 }

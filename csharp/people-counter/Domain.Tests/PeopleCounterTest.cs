@@ -21,9 +21,9 @@ namespace Domain.Tests
             );
 
             var cameras = new Cameras(httpClient);
-            var peopleFlow = cameras.Get(lobby);
+            var occupancy = cameras.GetFor(lobby);
 
-            Assert.Equal(25, Zone.Occupancy(peopleFlow));
+            Assert.Equal(25, occupancy.Total);
         }
     }
 }
