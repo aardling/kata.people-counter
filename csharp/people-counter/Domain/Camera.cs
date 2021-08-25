@@ -4,21 +4,18 @@ namespace Domain
 {
     public class Camera
     {
-        private readonly HttpClient _httpClient;
         private readonly string _name;
-        private readonly string _ip;
+        public readonly string Ip;
 
         public Camera(HttpClient httpClient, string name, string ip)
         {
-            _httpClient = httpClient;
             _name = name;
-            _ip = ip;
+            Ip = ip;
         }
 
-        public PeopleFlow PeopleFlow()
+        public static PeopleFlow PeopleFlow(HttpResponse response)
         {
-            var data = this._httpClient.fetch("http://${ip}/people-counter/api/live.json");
-            return new PeopleFlow(data.InAmount, data.OutAmount);
+            return new PeopleFlow(response.InAmount, response.OutAmount);
         }
     }
 }

@@ -20,27 +20,10 @@ namespace Domain.Tests
                 }
             );
 
-            lobby.Update();
-            Assert.Equal(25, lobby.Occupancy);
-        }
-        
-        [Fact]
-        public void IfNothingChangesUpdatingShouldHaveNoEffect()
-        {
-            var httpClient = new HttpClient();
-            var lobby = new Zone(
-                "South Auditorium", new List<Camera> {
-                    new Camera(httpClient, "Camera1", "192.168.55.130"),
-                    new Camera(httpClient, "Camera2", "192.168.55.131"),
-                    new Camera(httpClient, "Camera3", "192.168.55.132"),
-                    new Camera(httpClient, "Camera4", "192.168.55.133"),
-                    new Camera(httpClient, "Camera5", "192.168.55.134")
-                }
-            );
+            var cameras = new Cameras(httpClient);
+            var peopleFlow = cameras.Get(lobby);
 
-            lobby.Update();
-            lobby.Update();
-            Assert.Equal(25, lobby.Occupancy);
+            Assert.Equal(25, Zone.Occupancy(peopleFlow));
         }
     }
 }

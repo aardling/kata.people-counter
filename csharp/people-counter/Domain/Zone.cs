@@ -6,21 +6,14 @@ namespace Domain
     public class Zone
     {
         private readonly string _name;
-        private readonly List<Camera> _cameras;
-        private PeopleFlow _peopleFlow;
-        public int Occupancy => _peopleFlow.Total;
+        public readonly List<Camera> Cameras;
 
         public Zone(string name, List<Camera> cameras)
         {
             _name = name;
-            _cameras = cameras;
-            _peopleFlow = new PeopleFlow(0, 0);
+            Cameras = cameras;
         }
-
-        public void Update()
-        {
-            this._peopleFlow = this._cameras.Aggregate(new PeopleFlow(0, 0),
-                ((count, camera) => count.Add(camera.PeopleFlow())));
-        }
+        
+        public static int Occupancy(PeopleFlow peopleFlow) => peopleFlow.Total;
     }
 }
