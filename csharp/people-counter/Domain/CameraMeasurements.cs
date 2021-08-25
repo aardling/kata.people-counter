@@ -17,7 +17,7 @@ namespace Domain
         public CameraMeasurement ForCamera(Camera camera)
         {
             var data = this._httpClient.fetch("http://${camera.ip}/people-counter/api/live.json");
-            return Camera.PeopleFlow(data);
+            return new CameraMeasurement(data.InAmount, data.OutAmount);
         }
     }
 }
