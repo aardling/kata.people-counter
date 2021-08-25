@@ -7,8 +7,8 @@ namespace Domain.Tests
         [Fact]
         public void ShouldAddTwoCurrentCounts()
         {
-            var actual = new PeopleFlow(1, 1).Add(new PeopleFlow(4, 1));
-            Assert.Equal(new PeopleFlow(5, 2).Total, actual.Total);
+            var actual = new CameraMeasurement(1, 1).Add(new CameraMeasurement(4, 1));
+            Assert.Equal(new CameraMeasurement(5, 2).Total, actual.Total);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Domain
             return Occupancy.CalculateBasedOne(peopleFlows);
         }
 
-        private PeopleFlow ForCamera(Camera camera)
+        private CameraMeasurement ForCamera(Camera camera)
         {
             var data = this._httpClient.fetch("http://${camera.ip}/people-counter/api/live.json");
             return Camera.PeopleFlow(data);
