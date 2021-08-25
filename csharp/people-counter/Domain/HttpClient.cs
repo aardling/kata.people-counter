@@ -7,7 +7,7 @@ namespace Domain
      */
     public class HttpClient
     {
-        public HttpResponse fetch(string url)
+        public HttpResponse Fetch(string url)
         {
             return new HttpResponse(10, 5, "some name", DateTime.Now, "xd13f0af");
         }
