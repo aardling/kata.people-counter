@@ -2,6 +2,9 @@
 
 namespace Domain
 {
+    /* This class shouldn't be part of the domain, but of infrastructure
+       To keep things small and easy we didn't do this
+     */
     public class HttpClient
     {
         public HttpResponse fetch(string url)
