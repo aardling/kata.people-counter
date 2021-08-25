@@ -8,10 +8,12 @@ namespace Domain.Tests
         [Fact]
         public void ShouldCalculateTotals()
         {
-            var occupancy = Occupancy.From(new List<CameraMeasurement>()
+            var actual = Occupancy.From(new List<CameraMeasurement>()
                 {new CameraMeasurement(4, 1), new CameraMeasurement(1, 1)});
 
-            Assert.Equal(new Occupancy(3), occupancy);
+            var expected = Occupancy.From(new List<CameraMeasurement>() {new CameraMeasurement(3, 0)});
+
+            Assert.Equal(expected, actual);
         }
     }
 }
